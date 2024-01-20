@@ -1,4 +1,4 @@
-# Prostate Segmentation MOE
+# Prostate Segmentation MoE
 
 A simple Python library for easy segmentation of the prostate in T2-weighted MRI images in NIfTI format. This library utilizes a U-Net architecture for segmentation tasks and aims to provide a straightforward solution for users working with prostate MRI data.
 
@@ -16,7 +16,7 @@ pip install git+https://github.com/mpierangeli/prostate_segmentation_moe
 
 ## Usage
 ### Example
-A downloadable example is available in the examples directory. 
+Check for 'example.py'. 
 ### Scripted Download
 You can also download a T2-weighted MRI sequence using the provided script.
 
