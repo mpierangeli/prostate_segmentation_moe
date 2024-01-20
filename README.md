@@ -15,13 +15,13 @@ Install the library using pip:
 pip install git+https://github.com/mpierangeli/prostate_segmentation_moe
 
 ## Usage
-# Example
+### Example
 A downloadable example is available in the examples directory. 
-
-# Scripted Download
+### Scripted Download
 You can also download a T2-weighted MRI sequence using the provided script.
 
 ## License
 This project is licensed under the MIT License - see the LICENSE file for details.
+
 
 For more details, visit the GitHub repository.
