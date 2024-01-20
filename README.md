@@ -24,4 +24,5 @@ You can also download a T2-weighted MRI sequence using the provided script.
 This project is licensed under the MIT License - see the LICENSE file for details.
 
 
-For more details, visit the GitHub repository.
+For more details, visit the [GitHub repository](https://github.com/mpierangeli/prostate_segmentation_moe).
+
