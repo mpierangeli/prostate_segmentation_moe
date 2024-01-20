@@ -1,31 +1,35 @@
-# Metada needed for the library publishing
-
 from setuptools import setup, find_packages
 
 setup(
-    name='your-library-name',  # Replace with the actual name of your library
+    name='prostate_segmentation_moe',
     version='0.1.0',
     packages=find_packages(),
     install_requires=[
-        # List your dependencies here
+        'numpy>=1.23.5',
+        'matplotlib>=3.6.2',
+        'opencv-python>=4.6.0.66',
+        'nibabel>=5.2.0',
+        'scipy>=1.9.3',
+        'gdown>=4.7.3',
+        'keras>=2.15.0',
+        'tensorflow>=2.15.0'
     ],
-    author='Your Name',
-    author_email='your.email@example.com',
-    description='A short description of your library',
-    long_description=open('README.md').read(),  # Include a README file for a detailed description
+    author='Martin Pierangeli',
+    author_email='marespierangeli@gmail.com',
+    description='A simple library for prostate segmentation for T2-W MRI sequences in Nifti format',
+    long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
-    url='https://github.com/your-username/your-repository',  # Replace with your GitHub repository URL
+    url='https://github.com/mpierangeli/prostate_segmentation_moe', 
     classifiers=[
-        'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.6',
-        'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: 3.10',
+        'Programming Language :: Python :: 3.11',
     ],
-    keywords='your, library, keywords',
+    keywords='UNet, ML, Prostate, Segmentations',
     project_urls={
-        'Source': 'https://github.com/your-username/your-repository',
+        'Source': 'https://github.com/mpierangeli/prostate_segmentation_moe',
     },
 )

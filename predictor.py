@@ -1,5 +1,3 @@
-# All functions needed for prediction
-
 import os
 import numpy as np
 import matplotlib.pyplot as plt
@@ -9,7 +7,6 @@ import time
 import nibabel as nib
 from nyul import nyul_apply_standard_scale
 import gdown
-
 import networks
 
 
