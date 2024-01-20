@@ -42,6 +42,26 @@ def model_downloader():
 
     return
 
+def load_example():
+    
+    try:
+        os.makedirs("test_images")
+        print(f"Folder created: test_images")
+    except FileExistsError:
+        print(f"Folder already exists: test_images")
+        return
+    
+    pf = os.path.join(os.getcwd(),"test_images")
+
+    gdown.download("https://drive.google.com/file/d/1bUl8uM5nOUPJCkGRwf1cWlrXqM5hBuDb/view?usp=sharing", 
+                   os.path.join(pf,"sujeto_006.nii"), 
+                   quiet=False,
+                   fuzzy=True)
+    
+    print("-- Finished downloading example --")
+
+    return
+
 
 def model_loading():
     
