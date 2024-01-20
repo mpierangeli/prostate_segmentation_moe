@@ -12,7 +12,7 @@ A simple Python library for easy segmentation of the prostate in T2-weighted MRI
 
 Install the library using pip:
 
-pip install git+https://github.com/mpierangeli/prostate_segmentation_moe
+```pip install git+https://github.com/mpierangeli/prostate_segmentation_moe```
 
 ## Usage
 ### Example
