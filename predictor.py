@@ -14,8 +14,36 @@ import networks
 
 
 def model_downloader():
+    
+    try:
+        os.makedirs("modelsh5")
+        print(f"Folder created: modelsh5")
+    except FileExistsError:
+        print(f"Folder already exists: modelsh5")
+        return
+    
+    pf = os.path.join(os.getcwd(),"modelsh5")
 
-    pass
+    gdown.download("https://drive.google.com/file/d/1bNIWg5OOhCMMY2e-0K-JVgKxzcj1LUbM/view?usp=sharing", 
+                   os.path.join(pf,"attunet_final.h5"), 
+                   quiet=False,
+                   fuzzy=True)
+    gdown.download("https://drive.google.com/file/d/1fiLNAW70bwqRGB0t_QjmVEYXjRFIPrZe/view?usp=sharing", 
+                   os.path.join(pf,"classicunet_final.h5"), 
+                   quiet=False,
+                   fuzzy=True)
+    gdown.download("https://drive.google.com/file/d/1r0ektmVG2UBhuiNNWYc_mL_b8iiVERdo/view?usp=sharing", 
+                   os.path.join(pf,"sunet_final.h5"), 
+                   quiet=False,
+                   fuzzy=True)
+    gdown.download("https://drive.google.com/file/d/1bWcbIhaDlWSmJyN7XERiQ7mD-RTEUCCE/view?usp=sharing", 
+                   os.path.join(pf,"unet3_final.h5"), 
+                   quiet=False,
+                   fuzzy=True)
+    
+    print("-- Finished downloading models --")
+
+    return
 
 
 def model_loading():
@@ -41,6 +69,9 @@ def predict(path,nets,moe_th=0.4,thresholds=[0.95,0.45,0.65,0.95],coeff=[169, 20
     y = x.get_fdata()
     y = nyul_apply_standard_scale(y, standard_path)
     
+    orig_img = []
+    predicted = []
+    heatmaps = []
     start = time.time()
     for slices in range(np.size(y,2)):
         img = y[63:319,63:319,slices]
@@ -51,6 +82,9 @@ def predict(path,nets,moe_th=0.4,thresholds=[0.95,0.45,0.65,0.95],coeff=[169, 20
             prediction += ((net(test_img_input).numpy()) > thresholds[i])*coeff[i]/sum(coeff)
         predicted_img_th = (prediction[0,:,:,0] > moe_th)*1
         volumen += np.sum(predicted_img_th)*(x.header["pixdim"][1]*x.header["pixdim"][2]*x.header["pixdim"][3])
+        orig_img.append(test_img_input)
+        heatmaps.append(prediction)
+        predicted.append(predicted_img_th)
     end = time.time()
     
     inference_time = end-start
@@ -58,19 +92,19 @@ def predict(path,nets,moe_th=0.4,thresholds=[0.95,0.45,0.65,0.95],coeff=[169, 20
     
     return {
         "volume":volumen,
-        "heatmap":prediction,
-        "prediction":predicted_img_th,
+        "heatmap":heatmaps,
+        "prediction":predicted,
         "inference_time": inference_time,
-        "processed": img
+        "processed": orig_img
         }
 
   
-def seg_plot(path,moe):
+def seg_plot(path,nets,moe=0.4):
     
-    results = predict(path,moe)
+    results = predict(path,nets,moe)
     test_img = results["processed"][int(len(results["processed"])/2)]
-    prediction = results["prediction"]
-    heatmap = results["heatmap"]
+    prediction = results["prediction"][int(len(results["processed"])/2)]
+    heatmap = results["heatmap"][int(len(results["processed"])/2)]
 
     contours, _ = cv2.findContours(prediction.astype(np.uint8), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     bordes = np.zeros_like(prediction, dtype=np.uint8)
@@ -100,7 +134,3 @@ def seg_plot(path,moe):
     plt.show()
     
     return
-
-if __name__ == "__main__":
-    
-    nets = model_loading()
