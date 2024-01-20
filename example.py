@@ -10,7 +10,7 @@ if __name__ == "__main__":
     nets = predictor.model_loading()
     
     # You can download an example if needed
-    # predictor.load_example()
+    predictor.load_example()
     
     # Third predict the subject
     results = predictor.predict("test_images\sujeto_006.nii",nets)
