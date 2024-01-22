@@ -5,9 +5,9 @@ from matplotlib.colors import Normalize
 import cv2
 import time
 import nibabel as nib
-from nyul import nyul_apply_standard_scale
+from .nyul import nyul_apply_standard_scale
 import gdown
-import networks
+from .networks import AttUnet, unet3plus, UNet, classicUNet
 
 
 def model_downloader():
@@ -65,13 +65,13 @@ def load_example():
 
 def model_loading():
     
-    attunet = networks.AttUnet(input_size=(256,256,1),activation="selu",initializer="lecun_normal",num_filters=64)
+    attunet = AttUnet(input_size=(256,256,1),activation="selu",initializer="lecun_normal",num_filters=64)
     attunet.load_weights("modelsh5/attunet_final.h5")
-    unet3 = networks.unet3plus(input_size=(256,256,1))
+    unet3 = unet3plus(input_size=(256,256,1))
     unet3.load_weights("modelsh5/unet3_final.h5")
-    sunet = networks.UNet(input_size=(256,256,1),activation="relu",initializer="he_uniform",num_filters=32)
+    sunet = UNet(input_size=(256,256,1),activation="relu",initializer="he_uniform",num_filters=32)
     sunet.load_weights("modelsh5/sunet_final.h5")
-    classicunet = networks.classicUNet(input_size=(256,256,1),activation="selu",initializer="lecun_normal",num_filters=64)
+    classicunet = classicUNet(input_size=(256,256,1),activation="selu",initializer="lecun_normal",num_filters=64)
     classicunet.load_weights("modelsh5/classicunet_final.h5")
     
     return [attunet,unet3,sunet,classicunet]
