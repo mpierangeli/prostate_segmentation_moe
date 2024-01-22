@@ -1,6 +1,7 @@
-# Prostate Segmentation MoE
+# Prostate Segmentation MoE [![psmoe](https://img.shields.io/pypi/v/psmoe)](https://pypi.org/project/psmoe/)
 
 A simple Python module for easy segmentation of the prostate in T2-weighted MRI images in NIfTI format. This module utilizes a mixture of U-Net architectures for segmentation tasks and aims to provide a straightforward solution for users working with prostate MRI data.
+
 
 ## Features
 
@@ -22,16 +23,17 @@ A simple Python module for easy segmentation of the prostate in T2-weighted MRI 
 
 
 ## Installation
+- Upgrade pip if not already
 
-Install the library using pip:
+```pip install --upgrade pip```
 
-```pip install psmoe```
+- Install the library using pip:
+
+```pip install psmoe``` for last version
 
 ## Usage
 ### Example
 Check for `example.py` 
-### Scripted Download
-You can also download a T2-weighted MRI sequence using the provided function in the example.
 
 ## License
 This project is licensed under the MIT License - see the LICENSE file for details.
