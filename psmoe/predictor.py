@@ -8,6 +8,7 @@ import nibabel as nib
 from .nyul import nyul_apply_standard_scale
 import gdown
 from .networks import AttUnet, unet3plus, UNet, classicUNet
+import pkg_resources
 
 
 def model_downloader():
@@ -78,7 +79,7 @@ def model_loading():
     
 def predict(path,nets,moe_th=0.4,thresholds=[0.95,0.45,0.65,0.95],coeff=[169, 201, 228, 161]):
     
-    standard_path = 'nyul_landmarks.npy'
+    standard_path = pkg_resources.resource_filename("psmoe", 'nyul_landmarks.npy')
     nyul_media = 3.54715519304951
     nyul_var = 42.85355462071623
     volumen = 0
