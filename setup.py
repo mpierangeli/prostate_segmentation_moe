@@ -1,8 +1,8 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='prostate_segmentation_moe',
-    version='0.1.2',
+    name='psmoe',
+    version='0.1.3',
     packages=find_packages(),
     install_requires=[
         'numpy>=1.23.5',
