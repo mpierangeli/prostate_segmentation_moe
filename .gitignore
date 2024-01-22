@@ -4,3 +4,4 @@ test_images
 venv
 dist
 psmoe.egg-info
+setup.py
