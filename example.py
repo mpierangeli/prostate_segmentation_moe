@@ -1,4 +1,4 @@
-from src import predictor
+from psmoe import predictor
 
 
 
