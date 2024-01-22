@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='psmoe',
-    version='0.1.4',
+    version='0.1.4.1',
     packages=find_packages(),
     install_requires=[
         'numpy>=1.23.5',
@@ -16,7 +16,7 @@ setup(
     ],
     author='Martin Pierangeli',
     author_email='marespierangeli@gmail.com',
-    description='A simple library for prostate segmentation for T2-W MRI sequences in Nifti format',
+    description='A simple module for prostate segmentation of T2-W MRI sequences in Nifti format',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
     url='https://github.com/mpierangeli/prostate_segmentation_moe', 
