@@ -5,3 +5,4 @@ venv
 dist
 psmoe.egg-info
 setup.py
+test.ipynb
