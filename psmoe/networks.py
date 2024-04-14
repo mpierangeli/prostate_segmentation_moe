@@ -1,7 +1,7 @@
 from keras.models import Model
 from keras.layers import Input, Conv2D, MaxPooling2D, UpSampling2D, concatenate, Conv2DTranspose, BatchNormalization, Dropout, Lambda, Activation, multiply, add
 from keras import backend as K
-
+import tensorflow as tf
 
 ### bloques
 
@@ -46,11 +46,11 @@ def classic_deconv_block(inputs, activation="relu", initializer="he_normal", num
     return conv
 
 def attention_block(x, gating, num_filters):
-    shape_x = K.int_shape(x)
-    shape_g = K.int_shape(gating)
+    shape_x = x.shape
+    shape_g = gating.shape
 
     theta_x = Conv2D(num_filters, (2, 2), strides=(2, 2), padding='same')(x)
-    shape_theta_x = K.int_shape(theta_x)
+    shape_theta_x = theta_x.shape
 
     phi_g = Conv2D(num_filters, (1, 1), padding='same')(gating)
     upsample_g = Conv2DTranspose(num_filters, (3, 3),
@@ -61,7 +61,7 @@ def attention_block(x, gating, num_filters):
     act_xg = Activation('relu')(concat_xg)
     psi = Conv2D(1, (1, 1), padding='same')(act_xg)
     sigmoid_xg = Activation('sigmoid')(psi)
-    shape_sigmoid = K.int_shape(sigmoid_xg)
+    shape_sigmoid = sigmoid_xg.shape
     upsample_psi = UpSampling2D(size=(shape_x[1] // shape_sigmoid[1], shape_x[2] // shape_sigmoid[2]))(sigmoid_xg)
 
     upsample_psi = repeat_elem(upsample_psi, shape_x[3])
@@ -83,7 +83,7 @@ def gating_signal(input, num_filters):
 
 def repeat_elem(tensor, rep):
 
-    return Lambda(lambda x, repnum: K.repeat_elements(x, repnum, axis=3), arguments={'repnum': rep})(tensor)
+    return Lambda(lambda x, repnum: K.repeat_elements(x, repnum, axis=3), arguments={'repnum': rep}, output_shape=lambda s: (s[0], s[1], s[2], s[3]*rep))(tensor)
 
 ### modelos
 

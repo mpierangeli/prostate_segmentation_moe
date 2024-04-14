@@ -1,4 +1,5 @@
 from psmoe import predictor
+import os
 
 
 
@@ -12,8 +13,8 @@ nets = predictor.model_loading()
 predictor.load_example()
 
 # Third predict the subject
-results = predictor.predict("test_images\sujeto_006.nii",nets)
+results = predictor.predict(os.path.join("test_images","sujeto_006.nii"),nets)
 print(f"Volumen prostático = {results['volume']} ml")
 
 # Alternative to predict and plot middle image in sequence
-#predictor.seg_plot("test_images\sujeto_006.nii",nets)
+#predictor.seg_plot(os.path.join("test_images","sujeto_006.nii"),nets)

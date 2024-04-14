@@ -19,7 +19,17 @@ A simple Python module for easy segmentation of the prostate in T2-weighted MRI 
 ### Activate it
 ```venv\Scripts\activate```
 - You may need to run ```Set-ExecutionPolicy Unrestricted -Scope Process``` before activation
-- If creating your own repository don't forget to ignore the `venv` folder in the `.gitignore` file
+
+## Recommended before installation (Linux)
+
+### Install virtualenv if not already
+```pip install virtualenv```
+### Create a virtual environment
+```python -m venv venv```
+### Activate it
+```source venv/bin/activate```
+
+If creating your own repository don't forget to ignore the `venv` folder in the `.gitignore` file
 
 
 ## Installation
